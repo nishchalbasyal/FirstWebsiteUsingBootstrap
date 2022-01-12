@@ -1,0 +1,33 @@
+<div class="grid grid-3-9 medium-space">
+    <!-- GRID COLUMN -->
+    <div class="grid-column">
+    <?php
+
+      $sidebar_menu_sections = [
+        [  
+          'menu_items'      => $member_subnavigation_items
+        ]
+      ];
+
+      if ($current_component === 'forums') {
+        $sidebar_menu_sections = [
+          [
+            'title'       => esc_html_x('Forum Activity', 'Forum Activity Menu - Title', 'vikinger'),
+            'description' => esc_html_x('Check out your topics, replies, engagements and more! ', 'Forum Activity Menu - Description', 'vikinger'),
+            'icon'        => 'forum',
+            'menu_items'  => $member_subnavigation_items
+          ]
+        ];
+      }
+
+      /**
+       * Sidebar Menu
+       */
+      get_template_part('template-part/sidebar/sidebar-menu', null, [
+        'sidebar_menu_sections' => $sidebar_menu_sections,
+        'accordion'             => false,
+        'disable_header'        => $current_component !== 'forums'
+      ]);
+
+    ?>
+    </div>

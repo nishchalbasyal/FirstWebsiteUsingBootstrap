@@ -1,0 +1,29 @@
+<?php
+
+      $user_points = vikinger_gamipress_get_logged_user_points();
+
+      if ($gp_type === 'achievement') {
+        $post_data = vikinger_gamipress_get_achievements(['post__in'  => [$post->ID]], get_current_user_id())[0];
+      } else if ($gp_type === 'rank') {
+        $post_data = vikinger_gamipress_get_ranks(['post__in' => [$post->ID]], get_current_user_id())[0];
+      }
+
+      $achievement_args = [
+        'achievement'               => $post_data,
+        'user_points'               => $user_points,
+        'achievement_complete_info' => true,
+        'achievement_type'          => $post_type,
+        'achievement_image_wrap'    => $post_type === 'quest'
+      ];
+
+      /**
+       * Achievement Item Box
+       */
+      get_template_part('template-part/achievement/achievement', 'item-box', $achievement_args);
+
+?>
+    </div>
+    <!-- /GRID -->
+  </div>
+  <!-- /CONTENT GRID -->
+<?php
